@@ -44,7 +44,8 @@ class WebPageAppBar extends StatelessWidget {
                   ),
                   Text(
                     'Express delivery to',
-                    style: GoogleFonts.roboto(
+                    style: TextStyle(
+                      fontFamily: 'Montserrat-Light',
                       color: const Color.fromRGBO(154, 175, 169, 1),
                       // color: Color.fromRGBO(246, 247, 251, 1),
                       fontSize: context.width * 0.008,
@@ -116,10 +117,11 @@ class WebPageAppBar extends StatelessWidget {
                     children: [
                       Text(
                         'Upload Prescription',
-                        style: GoogleFonts.roboto(
+                        style: TextStyle(
+                            fontFamily: 'Montserrat-Light',
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: context.width * 0.01),
+                            fontSize: context.width * 0.007),
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: context.width * 0.01),

@@ -6,8 +6,7 @@ import 'package:srihari_medicals/presentation/home/widgets/category_widget.dart'
 import 'package:srihari_medicals/presentation/home/widgets/home_types.dart';
 import 'package:srihari_medicals/presentation/home/widgets/images_row.dart';
 import 'package:srihari_medicals/presentation/home/widgets/web_home_app_bar.dart';
-import 'package:srihari_medicals/util/asset_paths.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 
 class MyWebHomePage extends StatefulWidget {
   const MyWebHomePage({super.key});
