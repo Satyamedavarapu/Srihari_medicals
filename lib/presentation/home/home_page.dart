@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Image.asset(AssetPaths.sh_logo, height: 60.0, width: 60.0),
+                  Image.asset(AssetPaths.shLogo, height: 60.0, width: 60.0),
                   Stack(
                     alignment: Alignment.topRight,
                     clipBehavior: Clip.none,

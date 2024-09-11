@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
                     color: Colors.white,
                     alignment: Alignment.center,
                     child: Image.asset(
-                      AssetPaths.sh_logo,
+                      AssetPaths.shLogo,
                       alignment: Alignment.center,
                       filterQuality: FilterQuality.high,
                       fit: BoxFit.fill,

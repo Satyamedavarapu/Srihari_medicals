@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:srihari_medicals/presentation/authentication/login.dart';
 import 'package:provider/provider.dart';
+import 'package:srihari_medicals/presentation/home/home_page_web.dart';
 import 'package:srihari_medicals/providers/authentication_provider.dart';
+import 'package:srihari_medicals/themeing/web_theme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,6 +13,7 @@ void main() {
     statusBarColor: Colors.transparent,
   ));
   if (kIsWeb) {
+    runApp(const MyWebApp());
   } else {
     runApp(const MyApp());
   }
@@ -50,13 +53,10 @@ class MyWebApp extends StatelessWidget {
             create: (_) => AuthenticationProvider(), lazy: true)
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: LoginPage(),
+        debugShowCheckedModeBanner: false,
+        title: 'SriHari Medicals',
+        theme: WebTheme.webTheme,
+        home: const MyWebHomePage(),
       ),
     );
   }

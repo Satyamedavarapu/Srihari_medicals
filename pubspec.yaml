@@ -48,4 +48,15 @@ flutter:
   assets:
     - assets/
     - assets/categories/
+    - assets/web_images/
     - assets/sh_logo.png
+
+  fonts:
+    - family: "Montserrat"
+      fonts:
+        - asset: assets/fonts/Montserrat-Light.ttf
+        - asset: assets/fonts/Montserrat-Regular.ttf
+        - asset: assets/fonts/Montserrat-Medium.ttf
+        - asset: assets/fonts/Montserrat-Bold.ttf
+        - asset: assets/fonts/Montserrat-ExtraBold.ttf
+
