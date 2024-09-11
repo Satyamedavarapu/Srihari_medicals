@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:srihari_medicals/presentation/home_page.dart';
+import 'package:srihari_medicals/presentation/home/home_page.dart';
 
 class AuthenticationProvider extends ChangeNotifier {
   TextEditingController loginCtrl = TextEditingController(),
