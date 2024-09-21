@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:srihari_medicals/extensions/theme_extension.dart';
 import 'package:srihari_medicals/providers/authentication_provider.dart';
 import 'package:srihari_medicals/util/asset_paths.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -47,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
                   Container(
                       height: MediaQuery.sizeOf(context).height * 0.6,
                       decoration: const BoxDecoration(
-                          color: Color.fromRGBO(250, 251, 252, 1),
+                          color: const Color.fromRGBO(250, 251, 252, 1),
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(24.0),
                               topRight: Radius.circular(24.0))),
@@ -103,8 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                                 width: MediaQuery.sizeOf(context).width,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(25.0),
-                                    color:
-                                        const Color.fromRGBO(251, 209, 34, 1)),
+                                    color: context.lightGreen),
                                 margin: const EdgeInsets.symmetric(
                                     vertical: 16.0, horizontal: 4.0),
                                 padding:
@@ -115,8 +115,8 @@ class _LoginPageState extends State<LoginPage> {
                                       ? 'Send Otp'
                                       : 'Verify and Proceed',
                                   style: GoogleFonts.roboto(
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
                                       fontSize: 18.0),
                                 ),
                               ),
@@ -195,124 +195,8 @@ class _BuildCircle extends StatelessWidget {
       width: MediaQuery.sizeOf(context).width * 0.6,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: Color.fromRGBO(251, 209, 34, 1),
+        color: context.appBarGreen,
       ),
     );
   }
 }
-
-//
-// Consumer<AuthenticationProvider>(builder: (context, prov, child) {
-// return Stack(
-// children: [
-// Column(
-// mainAxisAlignment: MainAxisAlignment.start,
-// crossAxisAlignment: CrossAxisAlignment.start,
-// children: [
-// Expanded(
-// flex: 4,
-// child: Container(
-// color: Colors.white,
-// alignment: Alignment.center,
-// child: Image.asset(
-// AssetPaths.sh_logo,
-// alignment: Alignment.center,
-// height: MediaQuery.sizeOf(context).height / 5,
-// width: MediaQuery.sizeOf(context).width * 0.5,
-// ),
-// ),
-// ),
-// Expanded(
-// flex: 6,
-// child: Container(
-// decoration: const BoxDecoration(
-// color: Color.fromRGBO(250, 251, 252, 1),
-// borderRadius: BorderRadius.only(
-// topLeft: Radius.circular(24.0),
-// topRight: Radius.circular(24.0))),
-// padding: const EdgeInsets.symmetric(
-// horizontal: 12.0, vertical: 16.0),
-// child: Column(
-// mainAxisAlignment: MainAxisAlignment.start,
-// crossAxisAlignment: CrossAxisAlignment.start,
-// children: [
-// Text(prov.isLogin ? 'SignIn' : 'Verify OTP',
-// style: GoogleFonts.roboto(
-// fontWeight: FontWeight.w500,
-// fontSize: 18.0,
-// color:
-// const Color.fromRGBO(62, 62, 62, 1))),
-// Visibility(
-// visible: !prov.isLogin,
-// child: Padding(
-// padding:
-// const EdgeInsets.symmetric(vertical: 8.0),
-// child: Text(
-// 'Please enter the OTP that was sent to your registered mobile number.',
-// style: GoogleFonts.roboto(
-// fontSize: 14.0,
-// fontWeight: FontWeight.w500,
-// color: Colors.black),
-// ),
-// ),
-// ),
-// _BuildTextField(
-// ctrl: prov.loginCtrl,
-// iconData: FontAwesomeIcons.user,
-// label: 'Name',
-// isVisible: prov.isLogin),
-// _BuildTextField(
-// ctrl: prov.pwdCtrl,
-// iconData: FontAwesomeIcons.phone,
-// label: 'Phone Number',
-// isVisible: prov.isLogin),
-// _BuildTextField(
-// ctrl: prov.otpCtrl,
-// iconData: FontAwesomeIcons.lock,
-// label: 'Enter the OTP',
-// isVisible: !prov.isLogin),
-// InkResponse(
-// radius: 10.0,
-// onTap: prov.isLogin
-// ? prov.onSendOtp
-//     : () => prov.onVerifyOtp(context),
-// child: Container(
-// width: MediaQuery.sizeOf(context).width,
-// decoration: BoxDecoration(
-// borderRadius: BorderRadius.circular(25.0),
-// color:
-// const Color.fromRGBO(251, 209, 34, 1)),
-// margin: const EdgeInsets.symmetric(
-// vertical: 16.0, horizontal: 4.0),
-// padding:
-// const EdgeInsets.symmetric(vertical: 10.0),
-// alignment: Alignment.center,
-// child: Text(
-// prov.isLogin
-// ? 'Send Otp'
-//     : 'Verify and Proceed',
-// style: GoogleFonts.roboto(
-// fontWeight: FontWeight.w500,
-// color: Colors.black,
-// fontSize: 18.0),
-// ),
-// ),
-// )
-// ],
-// ),
-// )),
-// ],
-// ),
-// Positioned(
-// top: -MediaQuery.sizeOf(context).height * 0.15,
-// left: -MediaQuery.sizeOf(context).width * 0.3,
-// child: const _BuildCircle(),
-// ),
-// Positioned(
-// bottom: -MediaQuery.sizeOf(context).height * 0.15,
-// right: -MediaQuery.sizeOf(context).width * 0.3,
-// child: const _BuildCircle(),
-// )
-// ],
-// );
-// }),

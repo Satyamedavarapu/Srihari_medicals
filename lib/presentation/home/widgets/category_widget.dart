@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:srihari_medicals/extensions/theme_extension.dart';
+import 'package:srihari_medicals/presentation/home/widgets/heading_row.dart';
 
 import '../../../models/category_model.dart';
 import '../../../util/asset_paths.dart';
@@ -16,7 +17,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
     const CategoryModel(AssetPaths.mustHave, 'Must Haves'),
     const CategoryModel(AssetPaths.elderlyCare, 'Elderly Care'),
     const CategoryModel(AssetPaths.personalCare, 'Personal Care'),
-    const CategoryModel(AssetPaths.monsoon, 'Monsoon Essentials'),
+    const CategoryModel(AssetPaths.monsoon, 'Monsoon'),
     const CategoryModel(AssetPaths.motherCare, 'Mother Care'),
     const CategoryModel(AssetPaths.nutrition, 'Nutrition Care'),
     const CategoryModel(AssetPaths.nutritionCare, 'Nutrition Care'),
@@ -43,51 +44,52 @@ class _CategoryWidgetState extends State<CategoryWidget> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Browse by Category',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: context.width * 0.02,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Montserrat-Bold'),
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    height: context.height * 0.04,
-                    width: context.width * 0.04,
-                    decoration: BoxDecoration(
-                      color: context.buttonBg,
-                      shape: BoxShape.circle,
-                    ),
-                    alignment: Alignment.center,
-                    child: Icon(
-                      Icons.arrow_back_ios_sharp,
-                      size: context.width * 0.01,
-                    ),
-                  ),
-                  Container(
-                    height: context.height * 0.04,
-                    width: context.width * 0.04,
-                    decoration: BoxDecoration(
-                      color: context.buttonBg,
-                      shape: BoxShape.circle,
-                    ),
-                    alignment: Alignment.center,
-                    child: Icon(
-                      Icons.arrow_forward_ios_sharp,
-                      size: context.width * 0.01,
-                    ),
-                  ),
-                ],
-              )
-            ],
-          ),
+          HeadingRowWithButtons(title: 'Browse by Category', buttonColor: context.buttonBg),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: [
+          //     Text(
+          //       'Browse by Category',
+          //       style: TextStyle(
+          //           color: Colors.black,
+          //           fontSize: context.width * 0.02,
+          //           fontWeight: FontWeight.bold,
+          //           fontFamily: 'Montserrat-Bold'),
+          //     ),
+          //     Row(
+          //       mainAxisSize: MainAxisSize.min,
+          //       mainAxisAlignment: MainAxisAlignment.start,
+          //       children: [
+          //         Container(
+          //           height: context.height * 0.04,
+          //           width: context.width * 0.04,
+          //           decoration: BoxDecoration(
+          //             color: context.buttonBg,
+          //             shape: BoxShape.circle,
+          //           ),
+          //           alignment: Alignment.center,
+          //           child: Icon(
+          //             Icons.arrow_back_ios_sharp,
+          //             size: context.width * 0.01,
+          //           ),
+          //         ),
+          //         Container(
+          //           height: context.height * 0.04,
+          //           width: context.width * 0.04,
+          //           decoration: BoxDecoration(
+          //             color: context.buttonBg,
+          //             shape: BoxShape.circle,
+          //           ),
+          //           alignment: Alignment.center,
+          //           child: Icon(
+          //             Icons.arrow_forward_ios_sharp,
+          //             size: context.width * 0.01,
+          //           ),
+          //         ),
+          //       ],
+          //     )
+          //   ],
+          // ),
           // Expanded(child: Container()),
           SizedBox(
               height: context.height * 0.2,
