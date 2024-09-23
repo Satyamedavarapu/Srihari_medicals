@@ -12,6 +12,7 @@ import 'package:srihari_medicals/routing/routes.dart';
 import 'package:srihari_medicals/util/asset_paths.dart';
 
 import '../../util/widgets/mobile/appbar_mobile.dart';
+import '../widgets/images_row.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -38,8 +39,11 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            MobileAppBar(),
-            Text('Home')
+            const MobileAppBar(),
+            ImagesRow(
+                containerHeight: context.height * 0.25,
+                height: context.height * 0.2,
+                width: context.width * 0.3),
           ],
         ),
       ),
