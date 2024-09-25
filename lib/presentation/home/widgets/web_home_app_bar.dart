@@ -148,25 +148,25 @@ class WebPageAppBar extends StatelessWidget {
                 color: Colors.white.withOpacity(0.7),
                 fontSize: context.width * 0.01),
           ),
-          Container(
-            margin: EdgeInsets.only(left: context.width * 0.02),
-            decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.white,
-                ),
-                shape: BoxShape.circle),
-            child: Icon(
-              Icons.percent,
-              color: Colors.white,
-              size: context.width * 0.01,
-            ),
-          ),
-          Text(
-            '  Offers',
-            style: GoogleFonts.roboto(
-                color: Colors.white.withOpacity(0.7),
-                fontSize: context.width * 0.01),
-          ),
+          // Container(
+          //   margin: EdgeInsets.only(left: context.width * 0.02),
+          //   decoration: BoxDecoration(
+          //       border: Border.all(
+          //         color: Colors.white,
+          //       ),
+          //       shape: BoxShape.circle),
+          //   child: Icon(
+          //     Icons.percent,
+          //     color: Colors.white,
+          //     size: context.width * 0.01,
+          //   ),
+          // ),
+          // Text(
+          //   '  Cart',
+          //   style: GoogleFonts.roboto(
+          //       color: Colors.white.withOpacity(0.7),
+          //       fontSize: context.width * 0.01),
+          // ),
           Padding(
             padding: EdgeInsets.only(left: context.width * 0.02),
             child: Icon(
@@ -174,7 +174,13 @@ class WebPageAppBar extends StatelessWidget {
               color: Colors.white,
               size: context.width * 0.01,
             ),
-          )
+          ),
+          Text(
+            '   Cart',
+            style: GoogleFonts.roboto(
+                color: Colors.white.withOpacity(0.7),
+                fontSize: context.width * 0.01),
+          ),
         ],
       ),
     );
