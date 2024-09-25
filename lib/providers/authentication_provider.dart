@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:srihari_medicals/presentation/home/home_page.dart';
+import 'package:srihari_medicals/presentation/home/mobile/home_page.dart';
+import 'package:srihari_medicals/routing/routes.dart';
 
 class AuthenticationProvider extends ChangeNotifier {
   TextEditingController loginCtrl = TextEditingController(),
@@ -23,10 +24,8 @@ class AuthenticationProvider extends ChangeNotifier {
 
   void onVerifyOtp(BuildContext context) {
     // isLogin = true;
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
-        (Route<dynamic> route) => false);
+    Navigator.pushNamedAndRemoveUntil(
+        context, MobileRoutes.homeScreen, (Route<dynamic> route) => false);
     notifyListeners();
   }
 
