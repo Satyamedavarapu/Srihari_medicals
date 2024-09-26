@@ -6,7 +6,6 @@ import 'package:srihari_medicals/core/extensions/theme_extension.dart';
 import 'package:srihari_medicals/core/util/asset_paths.dart';
 import 'package:srihari_medicals/presentation/providers/mobile/mHome_provider.dart';
 
-
 class MobileAppBar extends StatelessWidget {
   const MobileAppBar({super.key});
 
