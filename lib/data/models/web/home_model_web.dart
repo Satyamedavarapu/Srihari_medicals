@@ -24,8 +24,8 @@ class ProductModel {
   @JsonKey(name: 'productname')
   final String productName;
 
-  @JsonKey(name: 'consumerdiscount')
-  final double discount;
+  @JsonKey(name: 'consumerdiscount', defaultValue: 0)
+  final double? discount;
 
   @JsonKey(name: 'productmrp')
   final double price;
@@ -36,11 +36,14 @@ class ProductModel {
   @JsonKey(name: 'categoryid')
   final int categoryId;
 
+  @JsonKey(name: 'image', defaultValue: '')
+  final String? productImage;
+
   @JsonKey(name: 'category')
-  final CategoryColorModel category;
+  final CategoryColorModel? category;
 
   const ProductModel(this.id, this.productName, this.discount, this.price,
-      this.categoryName, this.categoryId, this.category);
+      this.categoryName, this.categoryId, this.category, this.productImage);
 
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
       _$ProductModelFromJson(json);

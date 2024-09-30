@@ -5,30 +5,26 @@ import 'package:flutter/services.dart';
 import 'package:srihari_medicals/core/themeing/web_theme.dart';
 import 'package:srihari_medicals/presentation/ui/authentication/login.dart';
 import 'package:provider/provider.dart';
-import 'package:srihari_medicals/presentation/ui/home/home_page_web.dart';
 import 'package:srihari_medicals/presentation/providers/authentication_provider.dart';
 import 'package:srihari_medicals/presentation/providers/mobile/mHome_provider.dart';
-import 'package:srihari_medicals/app/routing/mobile/mobile_router.dart' as mobileRouter;
+import 'package:srihari_medicals/app/routing/mobile/mobile_router.dart'
+    as mobileRouter;
 
 final GlobalKey<NavigatorState> mobileNavigatorKey =
     GlobalKey<NavigatorState>();
-final GlobalKey<NavigatorState> webNavigatorKey = GlobalKey<NavigatorState>();
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
   ));
-  if (kIsWeb) {
-    runApp(const MyWebApp());
-  } else {
-    runApp( DevicePreview(
+
+  runApp(DevicePreview(
       enabled: !kIsWeb && !kReleaseMode,
-        builder: (BuildContext context) =>
-        const MyApp()));
-  }
+      builder: (BuildContext context) => const MyApp()));
 }
 
+/// Mobile App Entry Point
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -46,26 +42,6 @@ class MyApp extends StatelessWidget {
         navigatorKey: mobileNavigatorKey,
         onGenerateRoute: mobileRouter.onGenerateMobileRoute,
         home: const LoginPage(),
-      ),
-    );
-  }
-}
-
-class MyWebApp extends StatelessWidget {
-  const MyWebApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-            create: (_) => AuthenticationProvider(), lazy: true),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'SriHari Medicals',
-        theme: WebTheme.webTheme,
-        home: const MyWebHomePage(),
       ),
     );
   }

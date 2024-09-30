@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:srihari_medicals/core/handlers/stream_handler_widget.dart';
+import 'package:srihari_medicals/presentation/providers/web/web_home_provider.dart';
 import 'package:srihari_medicals/presentation/ui/home/widgets/blog_page.dart';
 import 'package:srihari_medicals/presentation/ui/home/widgets/category_widget.dart';
 import 'package:srihari_medicals/presentation/ui/home/widgets/customers_say.dart';
@@ -20,30 +23,46 @@ class MyWebHomePage extends StatefulWidget {
 
 class _MyWebHomePageState extends State<MyWebHomePage> {
   @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) => afterBuild());
+    super.initState();
+  }
+
+  void afterBuild() {
+    context.read<WebHomeProvider>().loadHomeData();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            WebPageAppBar(),
-            HomePageTypes(),
-            ImagesRow(),
-            CategoryWidget(),
-            ExploreProductsPage(
-              title: 'Explore our Products',
-            ),
-            WhyUsWidget(),
-            ProductsDisease(),
-            ExploreProductsPage(
-              title: 'Discount Products',
-            ),
-            ProductsByBrand(),
-            CustomerReviews(),
-            BlogPage(),
-            HomeFooter()
-          ],
-        ),
-      ),
-    );
+    return Scaffold(
+        body: StreamHandlerWidget(
+            stream: context.read<WebHomeProvider>().homeDataStreamCtrl.stream,
+            dataBuilder: (context, snapshot) {
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const WebPageAppBar(),
+                    HomePageTypes(categories: snapshot.categories),
+                    const ImagesRow(),
+                    CategoryWidget(categories: snapshot.categories),
+                    ExploreProductsPage(
+                      title: 'Explore our Products',
+                      products: snapshot.discountProducts,
+                    ),
+                    const WhyUsWidget(),
+                    const ProductsDisease(),
+                    ExploreProductsPage(
+                      title: 'Discount Products',
+                      products: snapshot.discountProducts,
+                    ),
+                    const ProductsByBrand(),
+                    const CustomerReviews(),
+                    const BlogPage(),
+                    const HomeFooter()
+                  ],
+                ),
+              );
+            },
+            retryCallback: afterBuild));
   }
 }

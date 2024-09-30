@@ -24,11 +24,15 @@ Map<String, dynamic> _$HomeModelWebToJson(HomeModelWeb instance) =>
 ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel(
       (json['id'] as num).toInt(),
       json['productname'] as String,
-      (json['consumerdiscount'] as num).toDouble(),
+      (json['consumerdiscount'] as num?)?.toDouble() ?? 0,
       (json['productmrp'] as num).toDouble(),
       json['categoryname'] as String,
       (json['categoryid'] as num).toInt(),
-      CategoryColorModel.fromJson(json['category'] as Map<String, dynamic>),
+      json['category'] == null
+          ? null
+          : CategoryColorModel.fromJson(
+              json['category'] as Map<String, dynamic>),
+      json['image'] as String? ?? '',
     );
 
 Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
@@ -39,6 +43,7 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
       'productmrp': instance.price,
       'categoryname': instance.categoryName,
       'categoryid': instance.categoryId,
+      'image': instance.productImage,
       'category': instance.category,
     };
 

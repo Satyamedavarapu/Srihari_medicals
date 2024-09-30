@@ -2,10 +2,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "main",
+            "name": "Mobile Main",
             "type": "dart",
             "request": "launch",
             "program": "lib/main.dart"
+        },
+        {
+            "name": "Web Main",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/web_main.dart"
         },
         {
             "name": "Srihari_medicals",

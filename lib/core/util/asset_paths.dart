@@ -18,6 +18,9 @@ class AssetPaths {
   static const String fitness = 'assets/categories/fitness_care.png';
 
   ///Web Homepage
-  static const stetho = 'assets/web_images/leading.png';
-  static const scooter = 'assets/web_images/trailing.png';
+  static const String stetho = 'assets/web_images/leading.png';
+  static const String scooter = 'assets/web_images/trailing.png';
+
+  ///Common Images
+  static const String noImage = 'assets/common/no_image.png';
 }

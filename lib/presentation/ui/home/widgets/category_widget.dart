@@ -1,31 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:srihari_medicals/core/extensions/theme_extension.dart';
 import 'package:srihari_medicals/core/util/asset_paths.dart';
+import 'package:srihari_medicals/data/models/web/home_model_web.dart';
+import 'package:srihari_medicals/presentation/common_widgets/cache_image.dart';
 import 'package:srihari_medicals/presentation/ui/home/widgets/heading_row.dart';
 
-import '../../../../data/models/category_model.dart';
-
-
-
 class CategoryWidget extends StatefulWidget {
-  const CategoryWidget({super.key});
+  final List<CategoryModel> categories;
+  const CategoryWidget({super.key, required this.categories});
 
   @override
   State<CategoryWidget> createState() => _CategoryWidgetState();
 }
 
 class _CategoryWidgetState extends State<CategoryWidget> {
-  List<CategoryModel> categories = [
-    const CategoryModel(AssetPaths.mustHave, 'Must Haves'),
-    const CategoryModel(AssetPaths.elderlyCare, 'Elderly Care'),
-    const CategoryModel(AssetPaths.personalCare, 'Personal Care'),
-    const CategoryModel(AssetPaths.monsoon, 'Monsoon'),
-    const CategoryModel(AssetPaths.motherCare, 'Mother Care'),
-    const CategoryModel(AssetPaths.nutrition, 'Nutrition Care'),
-    const CategoryModel(AssetPaths.nutritionCare, 'Nutrition Care'),
-    const CategoryModel(AssetPaths.fitness, 'Fitness Care'),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -46,61 +34,17 @@ class _CategoryWidgetState extends State<CategoryWidget> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          HeadingRowWithButtons(title: 'Browse by Category', buttonColor: context.buttonBg),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //   children: [
-          //     Text(
-          //       'Browse by Category',
-          //       style: TextStyle(
-          //           color: Colors.black,
-          //           fontSize: context.width * 0.02,
-          //           fontWeight: FontWeight.bold,
-          //           fontFamily: 'Montserrat-Bold'),
-          //     ),
-          //     Row(
-          //       mainAxisSize: MainAxisSize.min,
-          //       mainAxisAlignment: MainAxisAlignment.start,
-          //       children: [
-          //         Container(
-          //           height: context.height * 0.04,
-          //           width: context.width * 0.04,
-          //           decoration: BoxDecoration(
-          //             color: context.buttonBg,
-          //             shape: BoxShape.circle,
-          //           ),
-          //           alignment: Alignment.center,
-          //           child: Icon(
-          //             Icons.arrow_back_ios_sharp,
-          //             size: context.width * 0.01,
-          //           ),
-          //         ),
-          //         Container(
-          //           height: context.height * 0.04,
-          //           width: context.width * 0.04,
-          //           decoration: BoxDecoration(
-          //             color: context.buttonBg,
-          //             shape: BoxShape.circle,
-          //           ),
-          //           alignment: Alignment.center,
-          //           child: Icon(
-          //             Icons.arrow_forward_ios_sharp,
-          //             size: context.width * 0.01,
-          //           ),
-          //         ),
-          //       ],
-          //     )
-          //   ],
-          // ),
-          // Expanded(child: Container()),
+          HeadingRowWithButtons(
+              title: 'Browse by Category', buttonColor: context.buttonBg),
           SizedBox(
               height: context.height * 0.2,
               child: ListView.builder(
                   physics: const AlwaysScrollableScrollPhysics(),
                   scrollDirection: Axis.horizontal,
-                  itemCount: categories.length,
+                  itemCount: widget.categories.length,
                   itemBuilder: (context, index) {
-                    return BuildCategoryContainer(model: categories[index]);
+                    return BuildCategoryContainer(
+                        model: widget.categories[index]);
                   })),
           // Expanded(flex: 2, child: Container())
         ],
@@ -126,10 +70,12 @@ class BuildCategoryContainer extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset(model.image,
-                height: context.height * 0.1,
-                filterQuality: FilterQuality.high),
-            Text(model.text,
+            ClipRRect(
+                borderRadius: BorderRadius.circular(9.0),
+                child: BuildCachedNetworkImage(
+                    networkImage: model.categoryName, fit: BoxFit.contain)),
+            SizedBox(height: context.height * 0.01),
+            Text(model.categoryName,
                 textAlign: TextAlign.center,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
