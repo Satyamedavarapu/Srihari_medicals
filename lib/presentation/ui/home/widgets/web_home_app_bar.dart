@@ -71,7 +71,7 @@ class WebPageAppBar extends StatelessWidget {
             ],
           ),
           Container(
-            height: context.height * 0.045,
+            height: context.height * 0.05,
             width: context.width * 0.35,
             margin: EdgeInsets.symmetric(horizontal: context.width * 0.08),
             decoration: BoxDecoration(

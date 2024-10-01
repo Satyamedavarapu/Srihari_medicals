@@ -63,6 +63,7 @@ class _ExploreProductsPageState extends State<ExploreProductsPage> {
                   );
                 }),
           ),
+          SizedBox(height: context.height * 0.05),
           Visibility(
               visible: widget.showViewAll,
               child: const GreenButton(buttonName: 'View All'))
@@ -101,13 +102,6 @@ class BuildProductContainer extends StatelessWidget {
                     height: context.height * 0.10,
                     width: context.width * 0.07,
                   ),
-                  // child: Image.network(
-                  //   product.productImage ?? '',
-                  //   filterQuality: FilterQuality.high,
-                  //   fit: BoxFit.fill,
-                  //   height: context.height * 0.10,
-                  //   width: context.width * 0.07,
-                  // ),
                 ),
               ),
               Column(
@@ -170,11 +164,13 @@ class BuildProductContainer extends StatelessWidget {
           child: Visibility(
             visible: product.discount != null && product.discount! > 0,
             child: Container(
+              height: context.height * 0.05,
+              width: context.width * 0.06,
               decoration: BoxDecoration(
                 color: context.redColor,
                 borderRadius: BorderRadius.circular(21.0),
               ),
-              // alignment: Alignment.center,
+              alignment: Alignment.center,
               padding:
                   const EdgeInsets.symmetric(horizontal: 12, vertical: 8.0),
               child: Text(

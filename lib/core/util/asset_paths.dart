@@ -21,6 +21,18 @@ class AssetPaths {
   static const String stetho = 'assets/web_images/leading.png';
   static const String scooter = 'assets/web_images/trailing.png';
 
+  ///Diseases Images
+  static const String cardiac = 'assets/web_images/diseases/cardiac.png';
+  static const String diabetes = 'assets/web_images/diseases/diabetes.png';
+  static const String liver = 'assets/web_images/diseases/liver.png';
+  static const String stomach = 'assets/web_images/diseases/stomach.png';
+
+  ///Brand Images
+  static const String evion = 'assets/web_images/brands/evion.png';
+  static const String nivea = 'assets/web_images/brands/nivea.png';
+  static const String revital = 'assets/web_images/brands/revital.png';
+  static const String volini = 'assets/web_images/brands/volini.png';
+
   ///Common Images
   static const String noImage = 'assets/common/no_image.png';
 }

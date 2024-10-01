@@ -57,6 +57,8 @@ flutter:
     - assets/
     - assets/categories/
     - assets/web_images/
+    - assets/web_images/diseases/
+    - assets/web_images/brands/
     - assets/common/
     - assets/sh_logo.png
 

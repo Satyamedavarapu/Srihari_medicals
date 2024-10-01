@@ -24,9 +24,10 @@ class BuildCachedNetworkImage extends StatelessWidget {
       filterQuality: FilterQuality.high,
       fadeInCurve: Curves.easeIn,
       fadeInDuration: const Duration(milliseconds: 300),
-      progressIndicatorBuilder: (context, url, downloadProgress) =>
-          CircularProgressIndicator(
-              value: downloadProgress.progress, color: context.darkGreen),
+      progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+        child: CircularProgressIndicator(
+            value: downloadProgress.progress, color: context.darkGreen),
+      ),
       errorWidget: (context, string, object) {
         return Image.asset(
           AssetPaths.noImage,

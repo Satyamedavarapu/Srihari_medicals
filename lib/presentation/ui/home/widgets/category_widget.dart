@@ -5,6 +5,8 @@ import 'package:srihari_medicals/data/models/web/home_model_web.dart';
 import 'package:srihari_medicals/presentation/common_widgets/cache_image.dart';
 import 'package:srihari_medicals/presentation/ui/home/widgets/heading_row.dart';
 
+import '../../products/web/products_web.dart';
+
 class CategoryWidget extends StatefulWidget {
   final List<CategoryModel> categories;
   const CategoryWidget({super.key, required this.categories});
@@ -43,8 +45,18 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                   scrollDirection: Axis.horizontal,
                   itemCount: widget.categories.length,
                   itemBuilder: (context, index) {
-                    return BuildCategoryContainer(
-                        model: widget.categories[index]);
+                    return InkWell(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => ProductsWeb(
+                                    categories: widget.categories,
+                                    selectedCategoryId:
+                                        widget.categories[index].categoryId,
+                                  ))),
+                      child: BuildCategoryContainer(
+                          model: widget.categories[index]),
+                    );
                   })),
           // Expanded(flex: 2, child: Container())
         ],

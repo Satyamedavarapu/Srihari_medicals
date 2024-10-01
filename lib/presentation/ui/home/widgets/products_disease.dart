@@ -13,6 +13,13 @@ class ProductsDisease extends StatefulWidget {
 }
 
 class _ProductsDiseaseState extends State<ProductsDisease> {
+  final diseaseList = [
+    {'Name': 'Diabetes', 'Path': AssetPaths.diabetes},
+    {'Name': 'Cardiac', 'Path': AssetPaths.cardiac},
+    {'Name': 'Liver', 'Path': AssetPaths.liver},
+    {'Name': 'Stomach', 'Path': AssetPaths.stomach}
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,11 +32,14 @@ class _ProductsDiseaseState extends State<ProductsDisease> {
           HeadingRowWithButtons(
               title: 'Products Based on Disease',
               buttonColor: context.buttonCreamBg),
+          // SizedBox(height: context.height * 0.05),
           Expanded(
               child: ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
             scrollDirection: Axis.horizontal,
             padding: EdgeInsets.zero,
-            itemCount: 12,
+            itemCount: diseaseList.length,
             itemBuilder: (context, index) {
               return Container(
                 // color: Colors.teal,
@@ -51,7 +61,7 @@ class _ProductsDiseaseState extends State<ProductsDisease> {
                         padding: const EdgeInsets.all(12.0),
                         alignment: Alignment.center,
                         child: Image.asset(
-                          AssetPaths.nutrition,
+                          diseaseList[index]['Path']!,
                           filterQuality: FilterQuality.high,
                           fit: BoxFit.cover,
                           height: context.height * 0.09,
@@ -59,7 +69,7 @@ class _ProductsDiseaseState extends State<ProductsDisease> {
                       ),
                     ),
                     Text(
-                      '\nDiabetes',
+                      '\n${diseaseList[index]['Name']}',
                       style: context.titleStyle.copyWith(color: Colors.black),
                     )
                   ],
@@ -67,7 +77,8 @@ class _ProductsDiseaseState extends State<ProductsDisease> {
               );
             },
           )),
-          const GreenButton(buttonName: 'View All')
+          // SizedBox(height: context.height * 0.05),
+          // const GreenButton(buttonName: 'View All')
         ],
       ),
     );

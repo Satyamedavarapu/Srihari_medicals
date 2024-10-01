@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:srihari_medicals/core/extensions/theme_extension.dart';
 import 'package:srihari_medicals/core/util/asset_paths.dart';
@@ -14,6 +13,13 @@ class ProductsByBrand extends StatefulWidget {
 }
 
 class _ProductsByBrandState extends State<ProductsByBrand> {
+  final brands = [
+    {'Name': 'Evion', 'Path': AssetPaths.evion},
+    {'Name': 'Nivea', 'Path': AssetPaths.nivea},
+    {'Name': 'Revital', 'Path': AssetPaths.revital},
+    {'Name': 'Volini', 'Path': AssetPaths.volini}
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,70 +31,72 @@ class _ProductsByBrandState extends State<ProductsByBrand> {
         children: [
           HeadingRowWithButtons(
               title: 'Products By Brand', buttonColor: context.buttonCreamBg),
+          SizedBox(height: context.height * 0.05),
           Expanded(
               child: ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
             scrollDirection: Axis.horizontal,
             padding: EdgeInsets.zero,
-            itemCount: 12,
+            itemCount: brands.length,
             itemBuilder: (context, index) {
-              return Stack(
-                alignment: Alignment.center,
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
-                    // color: Colors.teal,
-                    height: context.height * 0.30,
-                    // width: context.width * 0.25,
-                    margin: EdgeInsets.only(right: context.width * 0.06),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(36.0),
-                          child: Container(
-                            height: context.height * 0.25,
-                            width: context.width * 0.15,
-                            decoration: BoxDecoration(
-                              color: context.buttonCreamBg,
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Container(
+                        height: context.height * 0.30,
+                        margin: EdgeInsets.only(right: context.width * 0.06),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ClipRRect(
                               borderRadius: BorderRadius.circular(36.0),
-                            ),
-                            // padding: EdgeInsets.all(12.0),
-                            // alignment: Alignment.center,
-                            padding: EdgeInsets.symmetric(
-                                vertical: context.height * 0.03),
-                            child: Container(
-                              height: context.height * 0.2,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
+                              child: Container(
+                                height: context.height * 0.25,
+                                width: context.width * 0.15,
+                                decoration: BoxDecoration(
+                                  color: context.buttonCreamBg,
+                                  borderRadius: BorderRadius.circular(36.0),
+                                ),
+                                // padding: EdgeInsets.all(12.0),
+                                // alignment: Alignment.center,
+                                padding: EdgeInsets.symmetric(
+                                    vertical: context.height * 0.03),
+                                child: Container(
+                                  height: context.height * 0.2,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                  ),
+                                ),
                               ),
-                              // child:
-                              // child: Image.asset(
-                              //   AssetPaths.nutrition,
-                              //   filterQuality: FilterQuality.high,
-                              //   fit: BoxFit.cover,
-                              //   height: context.height * 0.09,
-                              //   width: double.maxFinite,
-                              // ),
                             ),
-                          ),
+                          ],
                         ),
-                        Text(
-                          '\nEvion',
-                          style:
-                              context.titleStyle.copyWith(color: Colors.black),
-                        )
-                      ],
-                    ),
+                      ),
+                      Image.asset(brands[index]['Path']!,
+                          filterQuality: FilterQuality.high,
+                          fit: BoxFit.fill,
+                          height: context.height * 0.1,
+                          alignment: Alignment.center)
+                    ],
                   ),
-                  Image.asset(AssetPaths.fitness,
-                      filterQuality: FilterQuality.high,
-                      fit: BoxFit.fill,
-                      height: context.height * 0.1,
-                      alignment: Alignment.center)
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      textAlign: TextAlign.center,
+                      brands[index]['Name']!,
+                      style: context.titleStyle.copyWith(color: Colors.black),
+                    ),
+                  )
                 ],
               );
             },
           )),
-          const GreenButton(buttonName: 'View All')
+          // SizedBox(height: context.height * 0.05)
+          // const GreenButton(buttonName: 'View All')
         ],
       ),
     );
