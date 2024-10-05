@@ -70,7 +70,7 @@ class _BuildReviewColumn extends StatelessWidget {
                   shape: BoxShape.circle,
                   image: DecorationImage(
                       image: AssetImage(assetPath),
-                      fit: BoxFit.cover,
+                      fit: BoxFit.contain,
                       filterQuality: FilterQuality.high)),
             ),
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:srihari_medicals/core/themeing/web_theme.dart';
+import 'package:srihari_medicals/presentation/providers/web/cart_provider_web.dart';
 import 'package:srihari_medicals/presentation/providers/web/products_provider_web.dart';
 import 'package:srihari_medicals/presentation/providers/web/web_home_provider.dart';
 import 'package:provider/provider.dart';
@@ -29,6 +30,7 @@ class MyWebApp extends StatelessWidget {
         ChangeNotifierProvider(
             create: (_) => AuthenticationProvider(), lazy: true),
         ChangeNotifierProvider(create: (_) => WebHomeProvider(), lazy: true),
+        ChangeNotifierProvider(create: (_) => WebCartProvider(), lazy: true),
         ChangeNotifierProvider(
             create: (_) => ProductsProviderWeb(), lazy: true),
       ],

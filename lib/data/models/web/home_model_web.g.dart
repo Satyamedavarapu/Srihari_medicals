@@ -28,10 +28,7 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel(
       (json['productmrp'] as num).toDouble(),
       json['categoryname'] as String,
       (json['categoryid'] as num).toInt(),
-      json['category'] == null
-          ? null
-          : CategoryColorModel.fromJson(
-              json['category'] as Map<String, dynamic>),
+      json['categorycolor'] as String,
       json['image'] as String? ?? '',
     );
 
@@ -44,17 +41,7 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
       'categoryname': instance.categoryName,
       'categoryid': instance.categoryId,
       'image': instance.productImage,
-      'category': instance.category,
-    };
-
-CategoryColorModel _$CategoryColorModelFromJson(Map<String, dynamic> json) =>
-    CategoryColorModel(
-      json['color'] as String,
-    );
-
-Map<String, dynamic> _$CategoryColorModelToJson(CategoryColorModel instance) =>
-    <String, dynamic>{
-      'color': instance.categoryColor,
+      'categorycolor': instance.categoryColor,
     };
 
 CategoryModel _$CategoryModelFromJson(Map<String, dynamic> json) =>

@@ -6,9 +6,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:srihari_medicals/core/extensions/theme_extension.dart';
 import 'package:srihari_medicals/core/util/preference_keys.dart';
-import 'package:srihari_medicals/global_variables.dart';
 import 'package:srihari_medicals/presentation/common_widgets/cache_image.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../../../../core/util/constants.dart';
 import '../../../../data/models/web/home_model_web.dart';
 import 'common_widgets.dart';
@@ -131,17 +129,6 @@ class _BuildProductContainerState extends State<BuildProductContainer> {
                         ),
                         Text('${Constants.rupee} ${widget.product.price}',
                             style: context.titleStyle),
-
-                        // Expanded(
-                        //   child: Row(
-                        //     children: [
-                        //       const Text('Add to Cart'),
-                        //       Visibility(
-                        //           visible: context.width > 800.0,
-                        //           child: const Icon(Icons.shopping_cart))
-                        //     ],
-                        //   ),
-                        // )
                       ],
                     ),
                   ),
@@ -152,9 +139,8 @@ class _BuildProductContainerState extends State<BuildProductContainer> {
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                            color:
-                                HexColor(widget.product.category!.categoryColor)
-                                    .withOpacity(0.2),
+                            color: HexColor(widget.product.categoryColor)
+                                .withOpacity(0.2),
                             borderRadius: BorderRadius.circular(15.0),
                           ),
                           padding: const EdgeInsets.all(8.0),
@@ -162,64 +148,11 @@ class _BuildProductContainerState extends State<BuildProductContainer> {
                           child: Text(
                             widget.product.categoryName,
                             style: TextStyle(
-                                color: HexColor(
-                                    widget.product.category!.categoryColor)),
+                                color: HexColor(widget.product.categoryColor)),
                           ),
                         ),
                         InkWell(
-                          // onTap: () async {
-                          //   var pref = await SharedPreferences.getInstance();
-                          //
-                          //   var existingProds =
-                          //       pref.getStringList(PreferenceKeys.cartData);
-                          //
-                          //   if (existingProds != null) {
-                          //     existingProds
-                          //         .map((json) =>
-                          //             ProductModel.fromJson(jsonDecode(json)))
-                          //         .toList();
-                          //
-                          //     existingProds.add(jsonEncode(product));
-                          //
-                          //     pref.setStringList(
-                          //         PreferenceKeys.cartData, existingProds);
-                          //   } else {
-                          //     List<String> prods = [];
-                          //
-                          //     prods.add(jsonEncode(product));
-                          //
-                          //     pref.setStringList(
-                          //         PreferenceKeys.cartData, prods);
-                          //   }
-                          // },
-                          // onTap: () async {
-                          //   var pref = await SharedPreferences.getInstance();
-                          //
-                          //   var existingProds =
-                          //       pref.getStringList(PreferenceKeys.cartData);
-                          //
-                          //   if (existingProds != null) {
-                          //     List<ProductModel> productList = existingProds
-                          //         .map((json) =>
-                          //             ProductModel.fromJson(jsonDecode(json)))
-                          //         .toList();
-                          //
-                          //     productList.add(product);
-                          //
-                          //     pref.setStringList(
-                          //         PreferenceKeys.cartData,
-                          //         productList
-                          //             .map((product) =>
-                          //                 jsonEncode(product.toJson()))
-                          //             .toList());
-                          //   } else {
-                          //     String prods = product.toJson();
-                          //
-                          //     pref.setString(PreferenceKeys.cartData, prods);
-                          //   }
-                          // },
-                          onTap: () => addToCart(),
-
+                          onTap: onAddToCart,
                           child: const Icon(
                             FontAwesomeIcons.cartPlus,
                           ),
@@ -259,45 +192,52 @@ class _BuildProductContainerState extends State<BuildProductContainer> {
     );
   }
 
-  void addToCart() async {
-    var currentCart = await storage.read(
-      key: PreferenceKeys.cartData,
-      aOptions: AndroidOptions(
+  void onAddToCart() async {
+    var pref = await SharedPreferences.getInstance();
 
-      )
-    );
+    // pref.remove(PreferenceKeys.cartData);
 
-    if (currentCart != null) {
-      var cartList = jsonDecode(currentCart);
-      List<ProductModel> cartProducts =
-          cartList.map<ProductModel>((p) => ProductModel.fromJson(p)).toList();
+    List<String>? existingProds = [];
 
-      if (cartProducts.contains(widget.product)) {
-        int currentQuantity = widget.product.cartQuantity;
+    widget.product.cartQuantity != null
+        ? widget.product.cartQuantity = widget.product.cartQuantity! + 1
+        : widget.product.cartQuantity = 1;
 
-        cartProducts.remove(widget.product);
+    var prod = widget.product.toJson().toString();
 
-        widget.product.cartQuantity = currentQuantity + 1;
-      } else {
-        widget.product.cartQuantity = 1;
+    existingProds = pref.getStringList(PreferenceKeys.cartData);
+
+    existingProds != null
+        ? (existingProds.contains(prod)
+            ? existingProds
+            : existingProds.add(prod))
+        : existingProds = [prod];
+
+    pref.setStringList(PreferenceKeys.cartData, existingProds);
+
+    List<String>? prodData = pref.getStringList(PreferenceKeys.cartData);
+
+    if (prodData != null) {
+      for (var p in prodData) {
+        debugPrint(p);
+        var prodEncoded = jsonEncode(p);
+        debugPrint(prodEncoded.toString());
+
+        var prodDecoded = jsonDecode(prodEncoded);
+        debugPrint(prodDecoded.toString());
+
+        var productModel = ProductModel.fromJson(prodDecoded);
+        debugPrint(productModel.toString());
       }
-
-      cartProducts.add(widget.product);
-
-      String updatedCart =
-          jsonEncode(cartProducts.map((cp) => cp.toJson()).toList());
-
-      await storage.write(key: PreferenceKeys.cartData, value: updatedCart);
-    } else {
-      List<ProductModel> newCart = <ProductModel>[];
-
-      widget.product.cartQuantity = 1;
-
-      newCart.add(widget.product);
-
-      String cart = jsonEncode(newCart.map((nc) => nc.toJson()));
-
-      await storage.write(key: PreferenceKeys.cartData, value: cart);
     }
+
+    // List<Map<String, dynamic>> jsonCart =
+    //     jsonEncode(prodData) as List<Map<String, dynamic>>;
+
+    // var latestCart =
+    //     jsonCart.map<ProductModel>((e) => ProductModel.fromJson(e)).toList();
+
+    debugPrint(prodData.toString());
+    // debugPrint(jsonCart.toString());
   }
 }

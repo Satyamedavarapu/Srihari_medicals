@@ -6,7 +6,8 @@ class DashboardWebRepo extends BaseService {
   Future<ResponseModel?> getWebHomeData() async {
     ResponseModel? response;
 
-    final resp = await onNetworkCall(url: Endpoints.dashboardWeb);
+    final resp = await onNetworkCall(
+        baseUrl: 'http://localhost:3000/', url: Endpoints.dashboardWeb);
 
     if (resp != null) {
       response = ResponseModel.fromJson(resp);

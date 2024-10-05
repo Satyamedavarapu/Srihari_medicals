@@ -27,7 +27,6 @@ dependencies:
   hexcolor: ^3.0.1
   go_router: ^14.2.8
   shared_preferences: ^2.3.2
-  flutter_secure_storage: ^4.2.1
 
 
 

@@ -39,15 +39,22 @@ class ProductModel {
   @JsonKey(name: 'image', defaultValue: '')
   final String? productImage;
 
-  @JsonKey(name: 'category')
-  final CategoryColorModel? category;
+  @JsonKey(name: 'categorycolor')
+  final String categoryColor;
 
-  @JsonKey(includeFromJson: false, defaultValue: 0)
-  int cartQuantity;
+  @JsonKey(includeFromJson: false)
+  int? cartQuantity;
 
-  ProductModel(this.id, this.productName, this.discount, this.price,
-      this.categoryName, this.categoryId, this.category, this.productImage,
-      {this.cartQuantity = 0});
+  ProductModel(
+    this.id,
+    this.productName,
+    this.discount,
+    this.price,
+    this.categoryName,
+    this.categoryId,
+    this.categoryColor,
+    this.productImage,
+  );
 
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
       _$ProductModelFromJson(json);
@@ -55,16 +62,16 @@ class ProductModel {
   Map<String, dynamic> toJson() => _$ProductModelToJson(this);
 }
 
-@JsonSerializable()
-class CategoryColorModel {
-  @JsonKey(name: 'color')
-  final String categoryColor;
-
-  const CategoryColorModel(this.categoryColor);
-
-  factory CategoryColorModel.fromJson(Map<String, dynamic> json) =>
-      _$CategoryColorModelFromJson(json);
-}
+// @JsonSerializable()
+// class CategoryColorModel {
+//   @JsonKey(name: 'color')
+//   final String categoryColor;
+//
+//   const CategoryColorModel(this.categoryColor);
+//
+//   factory CategoryColorModel.fromJson(Map<String, dynamic> json) =>
+//       _$CategoryColorModelFromJson(json);
+// }
 
 @JsonSerializable()
 class CategoryModel {
