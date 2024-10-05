@@ -7,7 +7,36 @@ import 'package:srihari_medicals/data/models/web/home_model_web.dart';
 import '../../../core/util/preference_keys.dart';
 
 class WebCartProvider extends ChangeNotifier {
+  bool isCartLoading = false;
   List<ProductModel> cartProducts = <ProductModel>[];
+
+  void onCartLoader(bool status) {
+    isCartLoading = status;
+    notifyListeners();
+  }
+
+  void loadCart() async {
+    try {
+      onCartLoader(true);
+
+      var pref = await SharedPreferences.getInstance();
+
+      List<String>? prodData = pref.getStringList(PreferenceKeys.cartData);
+
+      if (prodData != null) {
+        for (var p in prodData) {
+          debugPrint('for each prod $p');
+          var decodedProd = ProductModel.fromJson(jsonDecode(p));
+          cartProducts.add(decodedProd);
+        }
+      }
+
+      onCartLoader(false);
+    } catch (e) {
+      debugPrint(e.toString());
+      onCartLoader(false);
+    }
+  }
 
   void addToCart(ProductModel product) async {
     var pref = await SharedPreferences.getInstance();
@@ -18,7 +47,7 @@ class WebCartProvider extends ChangeNotifier {
         ? product.cartQuantity = product.cartQuantity! + 1
         : product.cartQuantity = 1;
 
-    var prod = jsonEncode(product).toString();
+    var prod = jsonEncode(product.toJson());
 
     existingProds = pref.getStringList(PreferenceKeys.cartData);
 
@@ -30,19 +59,29 @@ class WebCartProvider extends ChangeNotifier {
 
     pref.setStringList(PreferenceKeys.cartData, existingProds);
 
-    var prodData = pref.getStringList(PreferenceKeys.cartData);
-
-    var latestCart = prodData!
-        .map<ProductModel>((e) => ProductModel.fromJson(jsonDecode(e)))
-        .toList();
+    List<String>? prodData = pref.getStringList(PreferenceKeys.cartData);
 
     debugPrint(prodData.toString());
-    debugPrint(latestCart.toString());
+
+    if (prodData != null) {
+      for (var p in prodData) {
+        debugPrint('for each prod $p');
+
+        var decodedProd = ProductModel.fromJson(jsonDecode(p));
+
+        cartProducts.add(decodedProd);
+      }
+    }
   }
 
   void clearCart() async {
     var pref = await SharedPreferences.getInstance();
 
     pref.remove(PreferenceKeys.cartData);
+  }
+
+  void resetVariables() {
+    cartProducts.clear();
+    isCartLoading = false;
   }
 }

@@ -17,7 +17,7 @@ class _HomePageTypesState extends State<HomePageTypes> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: context.height * 0.1,
+      height: context.height * 0.08,
       color: context.bgGreen,
       alignment: Alignment.center,
       padding: EdgeInsets.symmetric(horizontal: context.width * 0.1),

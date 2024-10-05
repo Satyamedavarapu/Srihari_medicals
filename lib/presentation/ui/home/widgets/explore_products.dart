@@ -3,10 +3,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:srihari_medicals/core/extensions/theme_extension.dart';
 import 'package:srihari_medicals/core/util/preference_keys.dart';
+import 'package:srihari_medicals/main.dart';
 import 'package:srihari_medicals/presentation/common_widgets/cache_image.dart';
+import 'package:srihari_medicals/presentation/providers/web/cart_provider_web.dart';
 import '../../../../core/util/constants.dart';
 import '../../../../data/models/web/home_model_web.dart';
 import 'common_widgets.dart';
@@ -43,11 +46,8 @@ class _ExploreProductsPageState extends State<ExploreProductsPage> {
                   buttonColor: context.buttonCreamBg, title: widget.title)
               : Text(
                   widget.title,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: context.width * 0.02,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Montserrat-Bold'),
+                  style: context.buttonWhiteStyle.copyWith(
+                      color: Colors.black, fontSize: context.width * 0.02),
                 ),
           SizedBox(height: context.height * 0.1),
           Expanded(
@@ -148,11 +148,14 @@ class _BuildProductContainerState extends State<BuildProductContainer> {
                           child: Text(
                             widget.product.categoryName,
                             style: TextStyle(
-                                color: HexColor(widget.product.categoryColor)),
+                                color: HexColor(widget.product.categoryColor),
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
                         InkWell(
-                          onTap: onAddToCart,
+                          onTap: () => context
+                              .read<WebCartProvider>()
+                              .addToCart(widget.product),
                           child: const Icon(
                             FontAwesomeIcons.cartPlus,
                           ),
@@ -190,54 +193,5 @@ class _BuildProductContainerState extends State<BuildProductContainer> {
         )
       ],
     );
-  }
-
-  void onAddToCart() async {
-    var pref = await SharedPreferences.getInstance();
-
-    // pref.remove(PreferenceKeys.cartData);
-
-    List<String>? existingProds = [];
-
-    widget.product.cartQuantity != null
-        ? widget.product.cartQuantity = widget.product.cartQuantity! + 1
-        : widget.product.cartQuantity = 1;
-
-    var prod = widget.product.toJson().toString();
-
-    existingProds = pref.getStringList(PreferenceKeys.cartData);
-
-    existingProds != null
-        ? (existingProds.contains(prod)
-            ? existingProds
-            : existingProds.add(prod))
-        : existingProds = [prod];
-
-    pref.setStringList(PreferenceKeys.cartData, existingProds);
-
-    List<String>? prodData = pref.getStringList(PreferenceKeys.cartData);
-
-    if (prodData != null) {
-      for (var p in prodData) {
-        debugPrint(p);
-        var prodEncoded = jsonEncode(p);
-        debugPrint(prodEncoded.toString());
-
-        var prodDecoded = jsonDecode(prodEncoded);
-        debugPrint(prodDecoded.toString());
-
-        var productModel = ProductModel.fromJson(prodDecoded);
-        debugPrint(productModel.toString());
-      }
-    }
-
-    // List<Map<String, dynamic>> jsonCart =
-    //     jsonEncode(prodData) as List<Map<String, dynamic>>;
-
-    // var latestCart =
-    //     jsonCart.map<ProductModel>((e) => ProductModel.fromJson(e)).toList();
-
-    debugPrint(prodData.toString());
-    // debugPrint(jsonCart.toString());
   }
 }
