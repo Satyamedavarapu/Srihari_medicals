@@ -7,8 +7,6 @@ class ProductsWebRepo extends BaseService {
   Future<ResponseModel?> getCategoryProducts(Map<String, dynamic> query) async {
     ResponseModel? response;
 
-    await Future.delayed(const Duration(seconds: 2));
-
     final resp =
         await onNetworkCall(url: Endpoints.getCategoryProducts, query: query);
 

@@ -1,9 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:srihari_medicals/core/extensions/theme_extension.dart';
-import 'package:srihari_medicals/core/util/asset_paths.dart';
+import 'package:srihari_medicals/core/util/preference_keys.dart';
+import 'package:srihari_medicals/global_variables.dart';
 import 'package:srihari_medicals/presentation/common_widgets/cache_image.dart';
-
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import '../../../../core/util/constants.dart';
 import '../../../../data/models/web/home_model_web.dart';
 import 'common_widgets.dart';
 import 'heading_row.dart';
@@ -73,10 +79,15 @@ class _ExploreProductsPageState extends State<ExploreProductsPage> {
   }
 }
 
-class BuildProductContainer extends StatelessWidget {
+class BuildProductContainer extends StatefulWidget {
   final ProductModel product;
   const BuildProductContainer({super.key, required this.product});
 
+  @override
+  State<BuildProductContainer> createState() => _BuildProductContainerState();
+}
+
+class _BuildProductContainerState extends State<BuildProductContainer> {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -98,7 +109,7 @@ class BuildProductContainer extends StatelessWidget {
                   ),
                   alignment: Alignment.center,
                   child: BuildCachedNetworkImage(
-                    networkImage: product.productImage ?? '',
+                    networkImage: widget.product.productImage ?? '',
                     height: context.height * 0.10,
                     width: context.width * 0.07,
                   ),
@@ -110,12 +121,17 @@ class BuildProductContainer extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
-                            child: Text(
-                          product.productName,
-                          style: context.titleStyle,
-                        )),
+                          child: Text(
+                            widget.product.productName,
+                            style: context.titleStyle,
+                          ),
+                        ),
+                        Text('${Constants.rupee} ${widget.product.price}',
+                            style: context.titleStyle),
+
                         // Expanded(
                         //   child: Row(
                         //     children: [
@@ -136,19 +152,77 @@ class BuildProductContainer extends StatelessWidget {
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                            color: Colors.amberAccent.withOpacity(0.2),
+                            color:
+                                HexColor(widget.product.category!.categoryColor)
+                                    .withOpacity(0.2),
                             borderRadius: BorderRadius.circular(15.0),
                           ),
                           padding: const EdgeInsets.all(8.0),
                           alignment: Alignment.center,
                           child: Text(
-                            product.categoryName,
-                            style: const TextStyle(color: Colors.amberAccent),
+                            widget.product.categoryName,
+                            style: TextStyle(
+                                color: HexColor(
+                                    widget.product.category!.categoryColor)),
                           ),
                         ),
-                        Text('${product.price}', style: context.titleStyle),
-                        const Icon(
-                          FontAwesomeIcons.cartPlus,
+                        InkWell(
+                          // onTap: () async {
+                          //   var pref = await SharedPreferences.getInstance();
+                          //
+                          //   var existingProds =
+                          //       pref.getStringList(PreferenceKeys.cartData);
+                          //
+                          //   if (existingProds != null) {
+                          //     existingProds
+                          //         .map((json) =>
+                          //             ProductModel.fromJson(jsonDecode(json)))
+                          //         .toList();
+                          //
+                          //     existingProds.add(jsonEncode(product));
+                          //
+                          //     pref.setStringList(
+                          //         PreferenceKeys.cartData, existingProds);
+                          //   } else {
+                          //     List<String> prods = [];
+                          //
+                          //     prods.add(jsonEncode(product));
+                          //
+                          //     pref.setStringList(
+                          //         PreferenceKeys.cartData, prods);
+                          //   }
+                          // },
+                          // onTap: () async {
+                          //   var pref = await SharedPreferences.getInstance();
+                          //
+                          //   var existingProds =
+                          //       pref.getStringList(PreferenceKeys.cartData);
+                          //
+                          //   if (existingProds != null) {
+                          //     List<ProductModel> productList = existingProds
+                          //         .map((json) =>
+                          //             ProductModel.fromJson(jsonDecode(json)))
+                          //         .toList();
+                          //
+                          //     productList.add(product);
+                          //
+                          //     pref.setStringList(
+                          //         PreferenceKeys.cartData,
+                          //         productList
+                          //             .map((product) =>
+                          //                 jsonEncode(product.toJson()))
+                          //             .toList());
+                          //   } else {
+                          //     String prods = product.toJson();
+                          //
+                          //     pref.setString(PreferenceKeys.cartData, prods);
+                          //   }
+                          // },
+                          onTap: () => addToCart(),
+
+                          child: const Icon(
+                            FontAwesomeIcons.cartPlus,
+                          ),
                         )
                       ],
                     ),
@@ -162,7 +236,8 @@ class BuildProductContainer extends StatelessWidget {
           top: context.height * 0.02,
           right: -context.width * 0.02,
           child: Visibility(
-            visible: product.discount != null && product.discount! > 0,
+            visible:
+                widget.product.discount != null && widget.product.discount! > 0,
             child: Container(
               height: context.height * 0.05,
               width: context.width * 0.06,
@@ -174,7 +249,7 @@ class BuildProductContainer extends StatelessWidget {
               padding:
                   const EdgeInsets.symmetric(horizontal: 12, vertical: 8.0),
               child: Text(
-                '${product.discount}% OFF',
+                '${widget.product.discount}% OFF',
                 style: context.buttonWhiteStyle,
               ),
             ),
@@ -182,5 +257,47 @@ class BuildProductContainer extends StatelessWidget {
         )
       ],
     );
+  }
+
+  void addToCart() async {
+    var currentCart = await storage.read(
+      key: PreferenceKeys.cartData,
+      aOptions: AndroidOptions(
+
+      )
+    );
+
+    if (currentCart != null) {
+      var cartList = jsonDecode(currentCart);
+      List<ProductModel> cartProducts =
+          cartList.map<ProductModel>((p) => ProductModel.fromJson(p)).toList();
+
+      if (cartProducts.contains(widget.product)) {
+        int currentQuantity = widget.product.cartQuantity;
+
+        cartProducts.remove(widget.product);
+
+        widget.product.cartQuantity = currentQuantity + 1;
+      } else {
+        widget.product.cartQuantity = 1;
+      }
+
+      cartProducts.add(widget.product);
+
+      String updatedCart =
+          jsonEncode(cartProducts.map((cp) => cp.toJson()).toList());
+
+      await storage.write(key: PreferenceKeys.cartData, value: updatedCart);
+    } else {
+      List<ProductModel> newCart = <ProductModel>[];
+
+      widget.product.cartQuantity = 1;
+
+      newCart.add(widget.product);
+
+      String cart = jsonEncode(newCart.map((nc) => nc.toJson()));
+
+      await storage.write(key: PreferenceKeys.cartData, value: cart);
+    }
   }
 }

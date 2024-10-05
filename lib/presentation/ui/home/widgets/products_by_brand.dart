@@ -28,6 +28,7 @@ class _ProductsByBrandState extends State<ProductsByBrand> {
           horizontal: context.width * 0.1, vertical: context.height * 0.05),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           HeadingRowWithButtons(
               title: 'Products By Brand', buttonColor: context.buttonCreamBg),
@@ -40,16 +41,17 @@ class _ProductsByBrandState extends State<ProductsByBrand> {
             padding: EdgeInsets.zero,
             itemCount: brands.length,
             itemBuilder: (context, index) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Container(
-                        height: context.height * 0.30,
-                        margin: EdgeInsets.only(right: context.width * 0.06),
-                        child: Column(
+              return Container(
+                height: context.height * 0.30,
+                margin: EdgeInsets.only(right: context.width * 0.06),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             ClipRRect(
@@ -75,23 +77,21 @@ class _ProductsByBrandState extends State<ProductsByBrand> {
                             ),
                           ],
                         ),
-                      ),
-                      Image.asset(brands[index]['Path']!,
-                          filterQuality: FilterQuality.high,
-                          fit: BoxFit.fill,
-                          height: context.height * 0.1,
-                          alignment: Alignment.center)
-                    ],
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text(
+                        Image.asset(brands[index]['Path']!,
+                            filterQuality: FilterQuality.high,
+                            fit: BoxFit.fill,
+                            height: context.height * 0.1,
+                            alignment: Alignment.center)
+                      ],
+                    ),
+                    SizedBox(height: context.height * 0.03),
+                    Text(
                       textAlign: TextAlign.center,
                       brands[index]['Name']!,
                       style: context.titleStyle.copyWith(color: Colors.black),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               );
             },
           )),

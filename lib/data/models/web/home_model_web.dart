@@ -42,11 +42,17 @@ class ProductModel {
   @JsonKey(name: 'category')
   final CategoryColorModel? category;
 
-  const ProductModel(this.id, this.productName, this.discount, this.price,
-      this.categoryName, this.categoryId, this.category, this.productImage);
+  @JsonKey(includeFromJson: false, defaultValue: 0)
+  int cartQuantity;
+
+  ProductModel(this.id, this.productName, this.discount, this.price,
+      this.categoryName, this.categoryId, this.category, this.productImage,
+      {this.cartQuantity = 0});
 
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
       _$ProductModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ProductModelToJson(this);
 }
 
 @JsonSerializable()
