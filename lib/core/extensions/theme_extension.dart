@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:srihari_medicals/core/util/font_constants.dart';
 
 extension ThemeExtension on BuildContext {
   Color get darkGreen => Theme.of(this).primaryColor;
@@ -46,4 +47,8 @@ extension ThemeExtension on BuildContext {
       fontWeight: FontWeight.w500,
       fontSize: 12,
       fontFamily: 'Montserrat-Bold');
+
+  TextStyle get cartTotalStyle => const TextStyle(
+      color: Color.fromRGBO(26, 32, 44, 1),
+      fontFamily: FontConstants.montserrat);
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:srihari_medicals/app/routing/mobile/mobile_routes.dart';
-import 'package:srihari_medicals/presentation/ui/authentication/login.dart';
+import 'package:srihari_medicals/presentation/ui/authentication/mobile/login.dart';
 import 'package:srihari_medicals/presentation/ui/home/mobile/home_screen.dart';
 import 'package:srihari_medicals/presentation/ui/home/mobile/orders_mobile.dart';
 import 'package:srihari_medicals/presentation/ui/home/mobile/products_mobile.dart';

@@ -3,9 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:srihari_medicals/core/themeing/web_theme.dart';
-import 'package:srihari_medicals/presentation/ui/authentication/login.dart';
+import 'package:srihari_medicals/presentation/ui/authentication/mobile/login.dart';
 import 'package:provider/provider.dart';
-import 'package:srihari_medicals/presentation/providers/authentication_provider.dart';
+import 'package:srihari_medicals/presentation/providers/mobile/authentication_provider.dart';
 import 'package:srihari_medicals/presentation/providers/mobile/mHome_provider.dart';
 import 'package:srihari_medicals/app/routing/mobile/mobile_router.dart'
     as mobileRouter;

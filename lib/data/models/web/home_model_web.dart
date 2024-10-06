@@ -40,21 +40,14 @@ class ProductModel {
   final String? productImage;
 
   @JsonKey(name: 'categorycolor')
-  final String categoryColor;
+  final String? categoryColor;
 
-  @JsonKey(includeFromJson: false)
+  @JsonKey(name: 'cartquantity', includeFromJson: false)
   int? cartQuantity;
 
-  ProductModel(
-    this.id,
-    this.productName,
-    this.discount,
-    this.price,
-    this.categoryName,
-    this.categoryId,
-    this.categoryColor,
-    this.productImage,
-  );
+  ProductModel(this.id, this.productName, this.discount, this.price,
+      this.categoryName, this.categoryId, this.categoryColor, this.productImage,
+      {this.cartQuantity = 0});
 
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
       _$ProductModelFromJson(json);

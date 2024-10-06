@@ -139,7 +139,8 @@ class _BuildProductContainerState extends State<BuildProductContainer> {
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                            color: HexColor(widget.product.categoryColor)
+                            color: HexColor(
+                                    widget.product.categoryColor ?? '2975FF')
                                 .withOpacity(0.2),
                             borderRadius: BorderRadius.circular(15.0),
                           ),
@@ -148,7 +149,8 @@ class _BuildProductContainerState extends State<BuildProductContainer> {
                           child: Text(
                             widget.product.categoryName,
                             style: TextStyle(
-                                color: HexColor(widget.product.categoryColor),
+                                color: HexColor(
+                                    widget.product.categoryColor ?? '2975FF'),
                                 fontWeight: FontWeight.bold),
                           ),
                         ),

@@ -5,6 +5,7 @@ import 'package:srihari_medicals/data/models/web/home_model_web.dart';
 import 'package:srihari_medicals/presentation/common_widgets/cache_image.dart';
 import 'package:srihari_medicals/presentation/ui/home/widgets/heading_row.dart';
 
+import '../../../../core/util/font_constants.dart';
 import '../../products/web/products_web.dart';
 
 class CategoryWidget extends StatefulWidget {
@@ -85,7 +86,8 @@ class BuildCategoryContainer extends StatelessWidget {
             ClipRRect(
                 borderRadius: BorderRadius.circular(9.0),
                 child: BuildCachedNetworkImage(
-                    networkImage: model.categoryName, fit: BoxFit.contain)),
+                    networkImage: model.categoryImage ?? '',
+                    fit: BoxFit.contain)),
             SizedBox(height: context.height * 0.01),
             Text(model.categoryName,
                 textAlign: TextAlign.center,
@@ -93,8 +95,8 @@ class BuildCategoryContainer extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                     color: Color.fromRGBO(26, 32, 44, 1),
-                    fontWeight: FontWeight.w500,
-                    fontFamily: 'Montserrat-Bold')),
+                    fontWeight: FontWeight.w600,
+                    fontFamily: FontConstants.montserrat)),
           ],
         ),
       ),

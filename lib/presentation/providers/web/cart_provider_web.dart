@@ -75,9 +75,10 @@ class WebCartProvider extends ChangeNotifier {
   }
 
   void clearCart() async {
+    onCartLoader(true);
     var pref = await SharedPreferences.getInstance();
-
     pref.remove(PreferenceKeys.cartData);
+    loadCart();
   }
 
   void resetVariables() {

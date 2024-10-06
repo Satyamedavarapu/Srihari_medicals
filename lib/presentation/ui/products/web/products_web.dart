@@ -40,7 +40,7 @@ class _ProductsWebState extends State<ProductsWeb> {
         child: Column(
           children: [
             const WebPageAppBar(),
-            HomePageTypes(categories: widget.categories),
+            const HomePageTypes(),
             StreamHandlerWidget(
                 stream:
                     context.read<ProductsProviderWeb>().productStream.stream,

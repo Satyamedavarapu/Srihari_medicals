@@ -3,10 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:srihari_medicals/core/themeing/web_theme.dart';
 import 'package:srihari_medicals/presentation/providers/web/cart_provider_web.dart';
 import 'package:srihari_medicals/presentation/providers/web/products_provider_web.dart';
+import 'package:srihari_medicals/presentation/providers/web/web_auth_provider.dart';
 import 'package:srihari_medicals/presentation/providers/web/web_home_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:srihari_medicals/presentation/ui/home/home_page_web.dart';
-import 'package:srihari_medicals/presentation/providers/authentication_provider.dart';
+import 'package:srihari_medicals/presentation/providers/mobile/authentication_provider.dart';
 
 final GlobalKey<NavigatorState> webNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -27,10 +28,10 @@ class MyWebApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-            create: (_) => AuthenticationProvider(), lazy: true),
         ChangeNotifierProvider(create: (_) => WebHomeProvider(), lazy: true),
         ChangeNotifierProvider(create: (_) => WebCartProvider(), lazy: true),
+        ChangeNotifierProvider(
+            create: (_) => WebAuthenticationProvider(), lazy: true),
         ChangeNotifierProvider(
             create: (_) => ProductsProviderWeb(), lazy: true),
       ],

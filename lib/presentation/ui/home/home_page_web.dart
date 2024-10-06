@@ -42,7 +42,7 @@ class _MyWebHomePageState extends State<MyWebHomePage> {
                 child: Column(
                   children: [
                     const WebPageAppBar(),
-                    HomePageTypes(categories: snapshot.categories),
+                    const HomePageTypes(),
                     const ImagesRow(),
                     CategoryWidget(categories: snapshot.categories),
                     ExploreProductsPage(
@@ -50,14 +50,14 @@ class _MyWebHomePageState extends State<MyWebHomePage> {
                       products: snapshot.discountProducts,
                     ),
                     const WhyUsWidget(),
-                    const ProductsDisease(),
+                    // const ProductsDisease(),
                     ExploreProductsPage(
                       title: 'Discount Products',
                       products: snapshot.discountProducts,
                     ),
                     const ProductsByBrand(),
                     const CustomerReviews(),
-                    const BlogPage(),
+                    // const BlogPage(),
                     const HomeFooter()
                   ],
                 ),

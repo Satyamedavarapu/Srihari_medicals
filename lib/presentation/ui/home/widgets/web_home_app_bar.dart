@@ -5,6 +5,8 @@ import 'package:srihari_medicals/core/extensions/theme_extension.dart';
 import 'package:srihari_medicals/core/util/asset_paths.dart';
 import 'package:srihari_medicals/presentation/ui/cart/web/cart_page_web.dart';
 
+import '../../authentication/web/web_login.dart';
+
 class WebPageAppBar extends StatelessWidget {
   const WebPageAppBar({super.key});
 
@@ -24,53 +26,53 @@ class WebPageAppBar extends StatelessWidget {
             filterQuality: FilterQuality.high,
           ),
           SizedBox(width: context.width * 0.01),
-          const VerticalDivider(
-            width: 0.5,
-            color: Color.fromRGBO(255, 255, 255, 0.5),
-            indent: 8.0,
-            endIndent: 8.0,
-          ),
-          SizedBox(width: context.width * 0.01),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                children: [
-                  Icon(
-                    Icons.flash_on_sharp,
-                    color: Colors.amberAccent,
-                    size: context.width * 0.01,
-                  ),
-                  Text(
-                    'Express delivery to',
-                    style: TextStyle(
-                      fontFamily: 'Montserrat-Light',
-                      color: const Color.fromRGBO(154, 175, 169, 1),
-                      // color: Color.fromRGBO(246, 247, 251, 1),
-                      fontSize: context.width * 0.008,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Select Pincode  ',
-                    style: GoogleFonts.roboto(
-                      color: Colors.white,
-                      fontSize: context.width * 0.008,
-                    ),
-                  ),
-                  const Icon(
-                    Icons.keyboard_arrow_down_sharp,
-                    color: Colors.white,
-                  )
-                ],
-              )
-            ],
-          ),
+          // const VerticalDivider(
+          //   width: 0.5,
+          //   color: Color.fromRGBO(255, 255, 255, 0.5),
+          //   indent: 8.0,
+          //   endIndent: 8.0,
+          // ),
+          // SizedBox(width: context.width * 0.01),
+          // Column(
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     Row(
+          //       children: [
+          //         Icon(
+          //           Icons.flash_on_sharp,
+          //           color: Colors.amberAccent,
+          //           size: context.width * 0.01,
+          //         ),
+          //         Text(
+          //           'Express delivery to',
+          //           style: TextStyle(
+          //             fontFamily: 'Montserrat-Light',
+          //             color: const Color.fromRGBO(154, 175, 169, 1),
+          //             // color: Color.fromRGBO(246, 247, 251, 1),
+          //             fontSize: context.width * 0.008,
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //     Row(
+          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //       children: [
+          //         Text(
+          //           'Select Pincode  ',
+          //           style: GoogleFonts.roboto(
+          //             color: Colors.white,
+          //             fontSize: context.width * 0.008,
+          //           ),
+          //         ),
+          //         const Icon(
+          //           Icons.keyboard_arrow_down_sharp,
+          //           color: Colors.white,
+          //         )
+          //       ],
+          //     )
+          //   ],
+          // ),
           Container(
             height: context.height * 0.05,
             width: context.width * 0.35,
@@ -142,11 +144,15 @@ class WebPageAppBar extends StatelessWidget {
             color: Colors.white,
             size: context.width * 0.01,
           ),
-          Text(
-            '  Hello, Login/Sign Up',
-            style: GoogleFonts.roboto(
-                color: Colors.white.withOpacity(0.7),
-                fontSize: context.width * 0.01),
+          GestureDetector(
+            onTap: () => Navigator.push(context,
+                MaterialPageRoute(builder: (_) => const WebLoginPage())),
+            child: Text(
+              '  Hello, Login/Sign Up',
+              style: GoogleFonts.roboto(
+                  color: Colors.white.withOpacity(0.7),
+                  fontSize: context.width * 0.01),
+            ),
           ),
           // Container(
           //   margin: EdgeInsets.only(left: context.width * 0.02),
@@ -220,46 +226,46 @@ class WebSliverAppBar extends StatelessWidget {
             endIndent: 8.0,
           ),
           SizedBox(width: context.width * 0.01),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                children: [
-                  Icon(
-                    Icons.flash_on_sharp,
-                    color: Colors.amberAccent,
-                    size: context.width * 0.01,
-                  ),
-                  Text(
-                    'Express delivery to',
-                    style: TextStyle(
-                      fontFamily: 'Montserrat-Light',
-                      color: const Color.fromRGBO(154, 175, 169, 1),
-                      // color: Color.fromRGBO(246, 247, 251, 1),
-                      fontSize: context.width * 0.008,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Select Pincode  ',
-                    style: GoogleFonts.roboto(
-                      color: Colors.white,
-                      fontSize: context.width * 0.008,
-                    ),
-                  ),
-                  const Icon(
-                    Icons.keyboard_arrow_down_sharp,
-                    color: Colors.white,
-                  )
-                ],
-              )
-            ],
-          ),
+          // Column(
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     Row(
+          //       children: [
+          //         Icon(
+          //           Icons.flash_on_sharp,
+          //           color: Colors.amberAccent,
+          //           size: context.width * 0.01,
+          //         ),
+          //         Text(
+          //           'Express delivery to',
+          //           style: TextStyle(
+          //             fontFamily: 'Montserrat-Light',
+          //             color: const Color.fromRGBO(154, 175, 169, 1),
+          //             // color: Color.fromRGBO(246, 247, 251, 1),
+          //             fontSize: context.width * 0.008,
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //     Row(
+          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //       children: [
+          //         Text(
+          //           'Select Pincode  ',
+          //           style: GoogleFonts.roboto(
+          //             color: Colors.white,
+          //             fontSize: context.width * 0.008,
+          //           ),
+          //         ),
+          //         const Icon(
+          //           Icons.keyboard_arrow_down_sharp,
+          //           color: Colors.white,
+          //         )
+          //       ],
+          //     )
+          //   ],
+          // ),
           Container(
             height: context.height * 0.05,
             width: context.width * 0.35,

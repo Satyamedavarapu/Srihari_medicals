@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:srihari_medicals/core/extensions/theme_extension.dart';
 import 'package:srihari_medicals/core/util/asset_paths.dart';
-import 'package:srihari_medicals/presentation/providers/authentication_provider.dart';
+import 'package:srihari_medicals/presentation/providers/mobile/authentication_provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginPage extends StatefulWidget {

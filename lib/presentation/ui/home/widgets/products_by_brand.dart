@@ -84,12 +84,14 @@ class _ProductsByBrandState extends State<ProductsByBrand> {
                             alignment: Alignment.center)
                       ],
                     ),
-                    SizedBox(height: context.height * 0.03),
-                    Text(
-                      textAlign: TextAlign.center,
-                      brands[index]['Name']!,
-                      style: context.titleStyle.copyWith(color: Colors.black),
-                    )
+                    // SizedBox(height: context.height * 0.03),
+                    // Text(
+                    //   textAlign: TextAlign.center,
+                    //   brands[index]['Name']!,
+                    //   style: context.titleStyle.copyWith(
+                    //       color: Color.fromRGBO(26, 32, 44, 1),
+                    //       fontSize: context.width * 0.02),
+                    // )
                   ],
                 ),
               );

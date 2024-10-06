@@ -72,7 +72,7 @@ class BlogPage extends StatelessWidget {
                 }),
           ),
           SizedBox(height: context.height * 0.05),
-          GreenButton(buttonName: 'View All'),
+          const GreenButton(buttonName: 'View All'),
         ],
       ),
     );
