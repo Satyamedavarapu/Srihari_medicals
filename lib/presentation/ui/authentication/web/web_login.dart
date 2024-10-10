@@ -67,16 +67,16 @@ class _BuildLoginForm extends StatelessWidget with TextFieldMixin {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Create Account',
-                style: GoogleFonts.roboto(
-                    color: Color.fromRGBO(26, 32, 44, 1),
-                    fontSize: context.width * 0.02,
-                    fontWeight: FontWeight.w600),
-                // style: context.cartTotalStyle.copyWith(
-                //     color: Color.fromRGBO(26, 32, 44, 1),
-                //     fontSize: context.width * 0.02),
-              ),
+              // Text(
+              //   'Create Account',
+              //   style: GoogleFonts.roboto(
+              //       color: const Color.fromRGBO(26, 32, 44, 1),
+              //       fontSize: context.width * 0.02,
+              //       fontWeight: FontWeight.w600),
+              //   // style: context.cartTotalStyle.copyWith(
+              //   //     color: Color.fromRGBO(26, 32, 44, 1),
+              //   //     fontSize: context.width * 0.02),
+              // ),
               Text(
                 'Create Account',
                 style: context.cartTotalStyle.copyWith(
@@ -84,7 +84,7 @@ class _BuildLoginForm extends StatelessWidget with TextFieldMixin {
                     fontSize: context.width * 0.02,
                     fontWeight: FontWeight.w600),
               ),
-              SizedBox(height: context.height * 0.08),
+              SizedBox(height: context.height * 0.04),
               Align(
                 alignment: Alignment.center,
                 child: SizedBox(

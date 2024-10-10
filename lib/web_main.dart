@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:srihari_medicals/core/themeing/web_theme.dart';
@@ -11,11 +12,14 @@ import 'package:srihari_medicals/presentation/providers/mobile/authentication_pr
 
 final GlobalKey<NavigatorState> webNavigatorKey = GlobalKey<NavigatorState>();
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
   ));
+
+  await Firebase.initializeApp();
 
   runApp(const MyWebApp());
 }
